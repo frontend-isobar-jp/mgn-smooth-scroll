@@ -39,7 +39,7 @@ new mgnSmoothScroll(element [, option]);
 |Argument|Data type|Default|Descroption|
 |:-------|:--------|:------|:----------|
 |speed|Number|800|Specify scroll speed.|
-|easing|String|"linear"|Specify easing from one of the following:す。<br>"linear"<br>"easeInCubic"<br>"easeOutCubic"<br>"easeInOutCubic"<br>"easeInQuart"<br>"easeOutQuart"<br>"easeInOutQuart"<br>"easeInQuint"<br>"easeOutQuint"<br>"easeInOutQuint"|
+|easing|String|"linear"|Specify easing from one of the following:<br>"linear"<br>"easeInCubic"<br>"easeOutCubic"<br>"easeInOutCubic"<br>"easeInQuart"<br>"easeOutQuart"<br>"easeInOutQuart"<br>"easeInQuint"<br>"easeOutQuint"<br>"easeInOutQuint"|
 |posFix|Number|0|Specify a minus value for header.|
 |ignore|String|-|Specify element to be excluded from an event.|
 |blank|Boolean|false|Anchor link for page transition.|

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>mgn-smooth-scroll.js</title>
+    <meta name="description" content="mgn-smooth-scroll.jsは、jQueryを必要としないスムーススクロール機能のライブラリです。">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style>
+		body { background: #FFF; margin: 0px; overflow: hidden; overflow: auto;}
+		a { color: blue; text-decoration: underline; cursor: pointer; }
+		img { max-width: 100%; height: auto; }
+		main { padding: 40px 20px; }
+		main a { font-weight: bold; }
+		main section { margin-top: 60px; }
+		main section > section { margin-top: 40px; }
+		main h1, h2, h3 { margin: 0; padding: 0; }
+		main h2 { font-size: 1.75em; margin-bottom: 20px; border-bottom: 4px solid #333; }
+		main h3 { margin-bottom: 20px; font-size: 1em; background: #333; color: #FFF; padding: 10px; }
+		main h3:before { content: ":: ";  }
+		main pre { min-width: 400px; position: relative; display: inline-block; margin: 5px 0; background: #F9F9F9; border: 1px solid #DDD; padding: 10px 20px 20px; line-height: ; }
+		main pre[data-type]:before { content: attr(data-type); display: inline-block; position: absolute; top: 0; left: 0; line-height: 1; padding: 2px 5px; background: #999; color: #FFF; font-size: 0.8em; letter-spacing: 0.05em; }
+		main pre mark { background: rgba(0,0,255,0.1); font-weight: bold; display: inline-block; padding: 0 3px; }
+		footer { padding: 20px; background: #F7F7F7; }
+		footer p { font-size: 0.75em; }
+
+	</style>
+</head>
+<body>
+
+	<main>
+
+		<h1>mgn-smooth-scroll</h1>
+		<p>mgn-smooth-scroll.jsは、jQueryを必要としないスムーススクロール機能のライブラリです。</p>
+		<p><a href="https://github.com/frontend-isobar-jp/mgn-smooth-scroll">https://github.com/frontend-isobar-jp/mgn-smooth-scroll</a></p>
+
+		<div style="margin-top: 60px; padding-top: 60px; border-top: 1px solid #000;">
+			<a href="#target1">↓ target1</a>　 |　
+			<a href="#target2">↓ target2</a>　 |　
+			<a class="target" href="./#target3" target="_blank">↓ target3 blank</a>　 |　
+			<a class="ignore" href="#target2">↓ ignore</a>
+		</div>
+
+		<section id="target1" class="f-section">
+			<h2 class="a-ttl_base">target 1</h2>
+			<img src="./images/img.jpg" alt="">
+		</section>
+
+		<section id="target2" class="f-section">
+			<h2 class="a-ttl_base">target 2</h2>
+			<img src="./images/img2.jpg" alt="">
+		</section>
+
+		<section id="target3" class="f-section">
+			<h2 class="a-ttl_base">target 3</h2>
+			<img src="./images/img3.jpg" alt="">
+		</section>
+
+	</main>
+
+	<footer>
+		<p><a href="https://megane-template.com/" target="_blank">Megane Template</a></p>
+		<p>Copyrights Dentsu Isobar. Allrights reserved.</p>
+	</footer>
+
+	<script src="./bundle.js"></script>
+
+</body>
+</html>

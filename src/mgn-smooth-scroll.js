@@ -92,9 +92,10 @@ License: frontend-isobar-jp All Rights Reserved.
 
                         var HASH = GET_HASH.split("#")[1];
                         var TARGET = document.getElementById(HASH);
-                        var OFFSET_TOP = this_.GetOffset(TARGET).top;
-
-                        this_.SmoothScroll( OFFSET_TOP );
+                        if( TARGET ){
+                            var OFFSET_TOP = this_.GetOffset(TARGET).top;
+                            this_.SmoothScroll( OFFSET_TOP );
+                        }
 
                     }
 

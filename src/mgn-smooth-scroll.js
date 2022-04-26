@@ -38,7 +38,6 @@ License: frontend-isobar-jp All Rights Reserved.
         var this_ = this;
 
         if( this.btn[0] ) {
-            this.oldBrowser = this.GetAndroidVersion() < 4.4 || !this.btn[0].classList;
             this.Init();
         }
 
@@ -70,14 +69,14 @@ License: frontend-isobar-jp All Rights Reserved.
 
                 for (var j = 0; j < IGNORE_TXT.length; j++) { //not処理
 
-                    var IGUNORE = IGNORE_TXT[j].split(".")[1] ? IGNORE_TXT[j].split(".")[1] : IGNORE_TXT[j].split("#")[1];
+                    var IGNORE = IGNORE_TXT[j].split(".")[1] ? IGNORE_TXT[j].split(".")[1] : IGNORE_TXT[j].split("#")[1];
 
                     if (e.currentTarget.classList) {
-                        if( e.currentTarget.classList.contains(IGUNORE) ) ignore = true;
+                        if( e.currentTarget.classList.contains(IGNORE) ) ignore = true;
                     } else {
-                        if( new RegExp('(^| )' + IGUNORE + '( |$)', 'gi').test( e.currentTarget.className ) ) ignore = true;
+                        if( new RegExp('(^| )' + IGNORE + '( |$)', 'gi').test( e.currentTarget.className ) ) ignore = true;
                     }
-                    if( e.currentTarget.id == IGUNORE ) ignore = true;
+                    if( e.currentTarget.id == IGNORE ) ignore = true;
 
                 }
 
@@ -131,7 +130,7 @@ License: frontend-isobar-jp All Rights Reserved.
 
         var LoopAnim = function() {
 
-            if( !this_.oldBrowser ) render = requestAnimationFrame( Loop );
+            render = requestAnimationFrame( Loop );
 
             var CURRENT_TIME = new Date().getTime(); //経過時刻を取得
             var STATUS = (CURRENT_TIME - START_TIME) // 描画開始時刻から経過時刻を引く
@@ -153,23 +152,15 @@ License: frontend-isobar-jp All Rights Reserved.
                 this_.moveFlag = false;
                 this_.ScrollEnd();
 
-                if( this_.oldBrowser ) {
-                    clearInterval( Loop );
-                } else {
-                    cancelAnimationFrame( render );
-                }
+                cancelAnimationFrame( render );
 
                 window.scroll( 0, POSITION );
 
             }
         }
 
-        if( this.oldBrowser ) {
-            Loop = setInterval( LoopAnim, 33); // Android4.4未満は setInterval で処理
-        } else {
-            Loop = LoopAnim;
-            Loop();
-        }
+        Loop = LoopAnim;
+        Loop();
 
     }
 
@@ -204,14 +195,14 @@ License: frontend-isobar-jp All Rights Reserved.
 
             for (var j = 0; j < IGNORE_TXT.length; j++) { //not処理
 
-                var IGUNORE = IGNORE_TXT[j].split(".")[1] ? IGNORE_TXT[j].split(".")[1] : IGNORE_TXT[j].split("#")[1];
+                var IGNORE = IGNORE_TXT[j].split(".")[1] ? IGNORE_TXT[j].split(".")[1] : IGNORE_TXT[j].split("#")[1];
 
                 if (this.btn[i].classList) {
-                    if( this.btn[i].classList.contains(IGUNORE) ) ignore = true;
+                    if( this.btn[i].classList.contains(IGNORE) ) ignore = true;
                 } else {
-                    if( new RegExp('(^| )' + IGUNORE + '( |$)', 'gi').test( this.btn[i].className ) ) ignore = true;
+                    if( new RegExp('(^| )' + IGNORE + '( |$)', 'gi').test( this.btn[i].className ) ) ignore = true;
                 }
-                if( this.btn[i].id.match( IGUNORE ) ) ignore = true;
+                if( this.btn[i].id.match( IGNORE ) ) ignore = true;
 
                 // 外部リンクは自動で無視
                 const internalLinkRegex = new RegExp('^((((http:\\/\\/|https:\\/\\/)(www\\.)?)?'+ window.location.hostname + ')|(localhost:\\d{4})|(\\/.*))(\\/.*)?$', '');
@@ -243,16 +234,6 @@ License: frontend-isobar-jp All Rights Reserved.
             var OFFSET_TOP = this.GetOffset(TARGET).top;
             this.SmoothScroll(OFFSET_TOP);
 
-        }
-
-    }
-
-    mgnSmoothScroll.prototype.GetAndroidVersion = function() {
-
-        var ua = navigator.userAgent;
-
-        if( (ua.toLowerCase().indexOf('android') > 0) && (ua.toLowerCase().indexOf('mobile') > 0) ) {
-            return parseFloat(ua.slice(ua.indexOf("Android")+8));
         }
 
     }

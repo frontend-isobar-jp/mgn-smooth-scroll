@@ -17,12 +17,14 @@ const SOURCE_MAP_STYLE = 'inline-source-map'; // 'inline-source-map', 'source-ma
 ** devServer Setting
 ***************************************/
 const DEV_SERVER = {
-    contentBase: ROOT_PATH_NAME,
     // open: true,
     port: 5000,
     host: '0.0.0.0',
-    watchContentBase: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    static: {
+        directory: ROOT_PATH_NAME,
+        watch: true,
+    }
 }
 
 

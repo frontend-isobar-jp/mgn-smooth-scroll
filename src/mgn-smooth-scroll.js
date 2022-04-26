@@ -66,11 +66,11 @@ License: frontend-isobar-jp All Rights Reserved.
             this.btn[i].addEventListener( "click", function(e) {
 
                 var ignore = false;
-                var IGUNORE_TXT = this_.ignore.split(",");
+                var IGNORE_TXT = this_.ignore.split(",");
 
-                for (var j = 0; j < IGUNORE_TXT.length; j++) { //not処理
+                for (var j = 0; j < IGNORE_TXT.length; j++) { //not処理
 
-                    var IGUNORE = IGUNORE_TXT[j].split(".")[1] ? IGUNORE_TXT[j].split(".")[1] : IGUNORE_TXT[j].split("#")[1];
+                    var IGUNORE = IGNORE_TXT[j].split(".")[1] ? IGNORE_TXT[j].split(".")[1] : IGNORE_TXT[j].split("#")[1];
 
                     if (e.currentTarget.classList) {
                         if( e.currentTarget.classList.contains(IGUNORE) ) ignore = true;
@@ -123,7 +123,7 @@ License: frontend-isobar-jp All Rights Reserved.
         var DIFF = POSITION - SCROLL_VAL;
         var num = SCROLL_VAL;
 
-        var START_TIME = new Date().getTime();　//描画開始時刻を取得
+        var START_TIME = new Date().getTime(); //描画開始時刻を取得
         var render;
         var numPrev = SCROLL_VAL;
 
@@ -133,7 +133,7 @@ License: frontend-isobar-jp All Rights Reserved.
 
             if( !this_.oldBrowser ) render = requestAnimationFrame( Loop );
 
-            var CURRENT_TIME = new Date().getTime();　//経過時刻を取得
+            var CURRENT_TIME = new Date().getTime(); //経過時刻を取得
             var STATUS = (CURRENT_TIME - START_TIME) // 描画開始時刻から経過時刻を引く
 
             var MOVE_Y = Math.round( Easing[this_.easing](STATUS, SCROLL_VAL, Math.abs(DIFF), this_.speed) );
@@ -165,7 +165,7 @@ License: frontend-isobar-jp All Rights Reserved.
         }
 
         if( this.oldBrowser ) {
-            Loop = setInterval( LoopAnim, 33); 　// Android4.4未満は setInterval で処理
+            Loop = setInterval( LoopAnim, 33); // Android4.4未満は setInterval で処理
         } else {
             Loop = LoopAnim;
             Loop();
@@ -199,12 +199,12 @@ License: frontend-isobar-jp All Rights Reserved.
         for (var i = 0; i < this.btn.length; i++) {
 
             var ignore = false;
-            var IGUNORE_TXT = this.ignore.split(",");
+            var IGNORE_TXT = this.ignore.split(",");
             var GET_HASH = this.btn[i].getAttribute("href");
 
-            for (var j = 0; j < IGUNORE_TXT.length; j++) { //not処理
+            for (var j = 0; j < IGNORE_TXT.length; j++) { //not処理
 
-                var IGUNORE = IGUNORE_TXT[j].split(".")[1] ? IGUNORE_TXT[j].split(".")[1] : IGUNORE_TXT[j].split("#")[1];
+                var IGUNORE = IGNORE_TXT[j].split(".")[1] ? IGNORE_TXT[j].split(".")[1] : IGNORE_TXT[j].split("#")[1];
 
                 if (this.btn[i].classList) {
                     if( this.btn[i].classList.contains(IGUNORE) ) ignore = true;
@@ -212,6 +212,12 @@ License: frontend-isobar-jp All Rights Reserved.
                     if( new RegExp('(^| )' + IGUNORE + '( |$)', 'gi').test( this.btn[i].className ) ) ignore = true;
                 }
                 if( this.btn[i].id.match( IGUNORE ) ) ignore = true;
+
+                // 外部リンクは自動で無視
+                const internalLinkRegex = new RegExp('^((((http:\\/\\/|https:\\/\\/)(www\\.)?)?'+ window.location.hostname + ')|(localhost:\\d{4})|(\\/.*))(\\/.*)?$', '');
+                if(!internalLinkRegex.test(GET_HASH)) {
+                    ignore = true;
+                }
 
             }
 
@@ -231,7 +237,9 @@ License: frontend-isobar-jp All Rights Reserved.
 
         if( location.href.split(this.customAnchor)[1] ){
 
-            var TARGET = document.getElementById(location.href.split(this.customAnchor)[1]);
+            var TARGET_ID = location.href.split(this.customAnchor)[1].split("&")[0];
+
+            var TARGET = document.getElementById(TARGET_ID);
             var OFFSET_TOP = this.GetOffset(TARGET).top;
             this.SmoothScroll(OFFSET_TOP);
 
